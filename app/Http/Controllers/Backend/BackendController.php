@@ -1,0 +1,91 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+class BackendController extends Controller
+{
+    /**
+     * admin dashboard
+     */
+    public function index()
+    {
+        return view('backend.pages.dashboard.index');
+    }
+
+    /**
+     * edit profile
+     */
+    public function edit()
+    {
+        return view('backend.pages.profile.index');
+    }
+
+    /**
+     * update profile data
+     */
+    public function update(Request $request)
+    {
+        // get the auth user
+        $data = User::where('id', $request->id)->first();
+
+        // validate data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|unique:users,email,' . $request->id
+        ]);
+
+        // getting profile photo
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $name = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path("upload/profile/"), $name);
+            $url = "upload/profile/" . $name;
+            // unlink old one
+            if (file_exists($data->photo)) {
+                unlink($data->photo);
+            }
+        }
+
+        // update data
+        $data->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'photo' => isset($url) ? $url : $data->photo,
+            'updated_at' => now(),
+        ]);
+
+        // action with notification
+        notyf()->info('Profile update success');
+        return redirect()->route('edit.profile');
+    }
+
+    /**
+     * update password
+     */
+    public function changepassword(Request $request)
+    {
+        // get the auth user data
+        $data = User::where('id', $request->id)->first();
+
+        // checking,matching and update old one
+        if (Hash::check($request->password, $data->password)) {
+            $data->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+            // action with notification
+            notyf()->info('Password change success');
+            return redirect()->route('edit.profile');
+        } else {
+            // action with notification
+            notyf()->error('Something wrong,please check and try again');
+            return redirect()->route('edit.profile');
+        }
+    }
+}
