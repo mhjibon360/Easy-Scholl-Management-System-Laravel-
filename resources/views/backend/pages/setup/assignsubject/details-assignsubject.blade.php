@@ -44,7 +44,6 @@
                                             <th>Full Mark</th>
                                             <th>Pass Mark</th>
                                             <th>Subjective Mark</th>
-                                            <th>Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,7 +53,7 @@
                                                 <td> <span class=" text-success">{{ $assignsubject->full_mark }}</span></td>
                                                 <td><span class=" text-warning">{{ $assignsubject->pass_mark }}</span></td>
                                                 <td><span class=" text-primary">{{ $assignsubject->get_mark }} </span></td>
-                                                <td>{{ $assignsubject->created_at->format('d-M-Y') }}</td>
+                                                <td></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -10,6 +10,8 @@ use App\Http\Controllers\Setup\DesignationController;
 use App\Http\Controllers\Setup\FeeCategoryController;
 use App\Http\Controllers\Setup\StudentYearController;
 use App\Http\Controllers\Backend\UsermanageController;
+use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\Mark\StudentMarkController;
 use App\Http\Controllers\Setup\StudentGroupController;
 use App\Http\Controllers\Setup\StudentShiftController;
 use App\Http\Controllers\Setup\AssignSubjectController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\Setup\StudentExamtypeController;
 use App\Http\Controllers\Student\RegistrationfeeController;
 
 Route::get('/', function () {
+    // return(Hash::make('111'));
     return view('welcome');
 });
 
@@ -48,8 +51,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/update/user/{id}', 'updateuser')->name('update.user');
         Route::delete('/delete/user/{id}', 'deleteuser')->name('delete.user');
     });
-
-
 
 
     Route::prefix('setup')->as('setup.')->group(function () {
@@ -179,6 +180,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/registrationfe/generate', 'registrationfegenerate')->name('registrationfe.generate');
             Route::get('/registrationfe/generate/result', 'registrationfegenerateresult')->name('registrationfe.generate.result');
             Route::get('/registrationfe/generate/store/{id}', 'registrationfegeneratestore')->name('registrationfe.generate.store');
+        });
+
+        Route::controller(StudentMarkController::class)->group(function () {
+            Route::get('/manage/mark', 'markshow')->name('manage.mark');
+            Route::get('/find/mark', 'markfind')->name('find.mark');
+            Route::post('/store/mark', 'markstore')->name('store.mark');
+        });
+
+        Route::controller(DefaultController::class)->group(function(){
+            Route::get('/get-subject','getSubject')->name('get.subject');
         });
     });
 });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\StudentMark;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -79,5 +80,15 @@ class AssignStudent extends Model
     public function feecategory(): BelongsTo
     {
         return $this->belongsTo(DiscountStudent::class, 'id', 'assign_student_id');
+    }
+
+      /**
+     * Get the user that owns the StudentMark
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function studentmark(): BelongsTo
+    {
+        return $this->belongsTo(StudentMark::class, 'id', 'student_id');
     }
 }

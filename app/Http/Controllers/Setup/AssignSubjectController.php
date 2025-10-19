@@ -107,10 +107,9 @@ class AssignSubjectController extends Controller
         // find and delete student data into database
         $assignsubjects = AssignSubject::with(['studentclass', 'studentsubject'])->where('class_id', $id)->get();
         $details = $assignsubjects->first();
+        // return($assignsubjects);
         return view('backend.pages.setup.assignsubject.details-assignsubject', compact(['assignsubjects', 'details']));
 
-        // action with notification
-        notyf()->warning('Student-Class delete success');
-        return redirect()->route('setup.student.assignsubject.view');
+
     }
 }

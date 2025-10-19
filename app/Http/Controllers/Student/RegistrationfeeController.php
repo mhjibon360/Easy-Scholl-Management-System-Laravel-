@@ -38,7 +38,7 @@ class RegistrationfeeController extends Controller
         // return ($request->all());
 
         $data = AssignStudent::with(['class', 'year', 'group', 'shift', 'student', 'discount'])->where('year_id', $request->year_id)->where('class_id', $request->class_id)->get();
-        // return($data);
+        // return ($data);
         return view('backend.pages.student.registration-fee.registration-fee-view', compact('data'));
     }
 
@@ -53,7 +53,7 @@ class RegistrationfeeController extends Controller
         $allgroups = StudentGroup::all();
         $allshifts = StudentShift::all();
         $allfees = FeeCategory::all();
-        $data = User::with('assignstudent.discount.feecategory','assignstudent.year','assignstudent.class')->where('id', $id)->first();
+        $data = User::with('assignstudent.discount.feecategory', 'assignstudent.year', 'assignstudent.class')->where('id', $id)->first();
         // return($data);
         // return view('backend.pages.pdf.sdudent-registration-fee', compact(['allclassess', 'allyears', 'allgroups', 'allshifts', 'allfees', 'data']));
 

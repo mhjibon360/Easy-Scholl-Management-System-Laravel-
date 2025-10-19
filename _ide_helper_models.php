@@ -28,6 +28,7 @@ namespace App\Models{
  * @property-read \App\Models\StudentGroup|null $group
  * @property-read \App\Models\StudentShift|null $shift
  * @property-read \App\Models\User|null $student
+ * @property-read \App\Models\StudentMark|null $studentmark
  * @property-read \App\Models\StudentYear|null $year
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AssignStudent newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AssignStudent newQuery()
@@ -206,6 +207,36 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $student_id
+ * @property string $id_no
+ * @property string $year_id
+ * @property string $class_id
+ * @property string $assign_subject_id
+ * @property string $exam_type_id
+ * @property string $mark
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $student
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereAssignSubjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereClassId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereExamTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereIdNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereMark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereStudentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark whereYearId($value)
+ */
+	class StudentMark extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -281,6 +312,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\AssignStudent|null $assignstudent
+ * @property-read \App\Models\StudentMark|null $marks
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])

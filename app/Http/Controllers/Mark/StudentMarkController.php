@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers\Mark;
+
+use App\Models\ExamType;
+use App\Models\StudentYear;
+use App\Models\StudentClass;
+use Illuminate\Http\Request;
+use App\Models\AssignStudent;
+use App\Http\Controllers\Controller;
+use App\Models\StudentMark;
+use App\Models\User;
+
+class StudentMarkController extends Controller
+{
+    /**
+     * mark show view
+     */
+    public function markshow(Request $request)
+    {
+        $allclassess = StudentClass::all();
+        $allyears = StudentYear::latest()->get();
+        $examtypes = ExamType::get();
+        return view('backend.pages.student.mark.manage-mark', compact('allclassess', 'allyears', 'examtypes'));
+    }
+
+    /**
+     * find mark
+     */
+
+    public function markfind(Request $request)
+    {
+        $data = AssignStudent::with(['class', 'year', 'group', 'shift', 'student', 'discount', 'studentmark'])->where('year_id', $request->year_id)->where('class_id', $request->class_id)->get();
+        return ($data);
+        return view('backend.pages.pdf.marrk-entry', compact('data'));
+    }
+
+    /**
+     * store mark
+     */
+    public function markstore(Request $request)
+    {
+
+        // return ($request->all());
+
+        $marks = $request->mark;
+        foreach ($marks as $key => $value) {
+            // student_id	id_no	year_id	class_id	assign_subject_id	exam_type_id	mark	created_at	updated_a
+            StudentMark::create([
+                'student_id' => $request->student_id[$key],
+                'id_no' => $request->id_no[$key],
+                'year_id' => $request->year_id,
+                'class_id' => $request->class_id,
+                'assign_subject_id' => $request->assign_subject_id,
+                'exam_type_id' => $request->exam_type_id,
+                'mark' => $value,
+            ]);
+        }
+
+        // action with notification
+        notyf()->info('Mark Entry success');
+        return redirect()->back();
+    }
+}
