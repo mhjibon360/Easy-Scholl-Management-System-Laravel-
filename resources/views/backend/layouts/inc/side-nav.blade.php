@@ -102,6 +102,9 @@
                          <li>
                              <a href="{{ route('student.manage.mark') }}" data-key="t-login">Mark Entry</a>
                          </li>
+                         <li>
+                             <a href="{{ route('student.edit.mark') }}" data-key="t-login">Edit Mark</a>
+                         </li>
                      </ul>
                  </li>
              </ul>

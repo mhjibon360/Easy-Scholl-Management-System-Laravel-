@@ -26,7 +26,7 @@
                         <td>
                             <input type="hidden" name="student_id[]" value="{{ $value->student->id }}">
                             <input type="hidden" name="id_no[]" value="{{ $value->student->id_no }}">
-                            <input type="number" class=" form-control" name="mark[]" value="{{ $value }}">
+                            <input type="number" class=" form-control" name="mark[]" value="{{ $value->mark }}">
                         </td>
                     </tr>
                 @empty

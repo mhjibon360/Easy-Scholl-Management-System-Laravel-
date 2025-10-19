@@ -185,6 +185,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::controller(StudentMarkController::class)->group(function () {
             Route::get('/manage/mark', 'markshow')->name('manage.mark');
             Route::get('/find/mark', 'markfind')->name('find.mark');
+            Route::get('/edit/mark', 'markedit')->name('edit.mark');
+            Route::get('/edit/mark/find', 'markeditfind')->name('edit.mark.find');
+            Route::post('/edit/mark/update', 'markeditupdate')->name('edit.mark.update');
             Route::post('/store/mark', 'markstore')->name('store.mark');
         });
 
