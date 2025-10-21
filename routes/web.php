@@ -66,6 +66,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/student/class/edit/{id}', 'studentedit')->name('student.class.edit');
             Route::put('/student/class/update/{id}', 'studentupdate')->name('student.class.update');
             Route::delete('/student/class/delete/{id}', 'studentdelete')->name('student.class.delete');
+            Route::get('/student/class/import', 'studentclassimport')->name('student.class.import');
+            Route::post('/student/class/import/store', 'studentclassimportstore')->name('student.class.import.store');
+            Route::get('/student/class/export', 'studentclassexport')->name('student.class.export');
         });
 
         // studnet  year all routes

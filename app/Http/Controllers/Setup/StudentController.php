@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Setup;
 
-use App\Http\Controllers\Controller;
+use App\Exports\ClassExport;
+use App\Imports\ClassImport;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -86,5 +89,34 @@ class StudentController extends Controller
         // action with notification
         notyf()->warning('Student-Class delete success');
         return redirect()->route('setup.student.class.view');
+    }
+
+    /**
+     * student class import
+     */
+    public function studentclassimport()
+    {
+        return view('backend.pages.setup.student.import-student');
+    }
+
+    /**
+     * student class import store
+     */
+    public function studentclassimportstore(Request $request)
+    {
+        return($request->all());
+        
+        Excel::import(new ClassImport, $request->file('import_file'));
+        // action with notification
+        notyf()->info('Class Imported Success');
+        return redirect()->route('setup.student.class.view');
+    }
+
+    /**
+     * student class export
+     */
+    public function studentclassexport()
+    {
+        return Excel::download(new ClassExport, 'studentclass.xlsx');
     }
 }

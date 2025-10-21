@@ -1,60 +1,30 @@
 @extends('backend.layouts.master')
-@section('title', 'all student class list view')
+@section('title', 'import student class list ')
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
-            <!-- start page title -->
-            <div class="row ">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18 text-capitalize">Studnet-Class</h4>
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{ route('setup.student.class.view') }}">all</a></li>
-                                <li class="breadcrumb-item active">Studnet-class</li>
-                            </ol>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-            <!-- end page title -->
 
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4 class="card-title">Show All Student Class</h4>
-                            <div>
-                                <div>
-                                    &nbsp;&nbsp;<a href="{{ route('setup.student.class.export') }}"
-                                        class=" btn btn-warning waves-effect waves-light">Export Student Class &nbsp;<i
-                                            class=" fas fa-download"></i></a>
-
-
-                                    &nbsp;&nbsp;<a href="{{ route('setup.student.class.import') }}"
-                                        class=" btn btn-primary waves-effect waves-light">Import Student Class &nbsp;<i
-                                            class=" fas fa-upload"></i></a>
-
-                                    <a href="{{ route('setup.student.class.view') }}"
-                                        class=" btn btn-primary waves-effect waves-light">All Studnet-Class &nbsp;<i
-                                            class=" fas fa-list"></i></a>
-                                </div>
-                            </div>
-
+                            <h4 class="card-title">Import file <span class=" text-danger">(.xlsx)</span></h4>
                         </div>
                         <div class="card-body">
 
-                            <form id="myForm" action="{{ route('setup.student.class.store') }}" method="post">
+                            <form id="myForm" action="{{ route('setup.student.class.import.store') }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3 form-group">
-                                            <label for="name" class="form-label text-capitalize">Student Class</label>
-                                            <input class="form-control" type="text" name="name"
-                                                value="{{ old('name') }}" id="name">
-                                            @error('name')
+                                            <label for="import_file" class="form-label text-capitalize">Student Class
+                                                File</label>
+                                            <input class="form-control" type="file" name="import_file" value=""
+                                                id="import_file">
+                                            @error('import_file')
                                                 <span class=" text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -85,7 +55,7 @@
                 },
                 messages: {
                     name: {
-                        required: 'Please enter student class',
+                        required: 'Please select xlsx file',
                     },
                 },
                 errorElement: 'strong',
