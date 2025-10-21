@@ -13,7 +13,7 @@
 
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
-                url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+                url('{{ asset('upload/slider/SM929108-min (1).jpg') }}') center/cover no-repeat;
             color: white;
             height: 100vh;
             display: flex;
@@ -27,11 +27,11 @@
 
         .feature-icon {
             font-size: 40px;
-            color: #007bff;
+            color: #5156BE;
         }
 
         footer {
-            background-color: #0d6efd;
+            background-color: #5156BE;
             color: white;
             padding: 15px 0;
         }
@@ -43,13 +43,12 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="#">SmartSchool</a>
+            <a class="navbar-brand fw-bold text-primary" style="color: #5156BE" href="{{ route('dashboard') }}">EASY SCHOOL</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
                     <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -62,7 +61,7 @@
         <div class="container">
             <h1>Manage Your School Smarter</h1>
             <p class="lead mt-3">All-in-one system for students, teachers, and administrators.</p>
-            <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-3">Explore Features</a>
+            <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-3 rounded-1" style="background: #5156BE">Explore Features</a>
         </div>
     </section>
 
@@ -96,24 +95,7 @@
         </div>
     </section>
 
-    <!-- About -->
-    <section class="py-5 bg-light" id="about">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <img src="https://images.unsplash.com/photo-1600172454284-934feca6c612?auto=format&fit=crop&w=800&q=80"
-                        class="img-fluid rounded" alt="School Image">
-                </div>
-                <div class="col-md-6">
-                    <h2 class="fw-bold">About Our System</h2>
-                    <p class="mt-3">Our School Management System is built to make education management easier and more
-                        efficient. From tracking students to managing staff and fees, everything is just a click away.
-                    </p>
-                    <a href="#" class="btn btn-primary mt-3">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Contact -->
     <section class="py-5" id="contact">

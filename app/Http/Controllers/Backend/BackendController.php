@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
+use App\Models\StudentClass;
+use App\Models\StudentGroup;
+use App\Models\StudentShift;
 use Illuminate\Http\Request;
+use App\Models\AssignStudent;
+use App\Models\StudentSubject;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +20,15 @@ class BackendController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.dashboard.index');
+        $data['teachers'] = User::where('usertype', 'employee')->count();
+        $data['students'] = User::where('usertype', 'student')->count();
+        $data['classes'] = StudentClass::count();
+        $data['groups'] = StudentGroup::count();
+        $data['shifts'] = StudentShift::count();
+        $data['subjects'] = StudentSubject::count();
+        $data['recentstudents'] = User::with('assignstudent.year', 'assignstudent.class')->where('usertype', 'student')->latest()->take(20)->get();
+        // return ($data);
+        return view('backend.pages.dashboard.index', $data);
     }
 
     /**

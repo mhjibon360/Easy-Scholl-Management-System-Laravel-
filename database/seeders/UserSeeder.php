@@ -815,7 +815,24 @@ class UserSeeder extends Seeder
                 'status' => 1,
                 'created_at' => '2025-01-10 10:46:00', // Added a new created_at timestamp
             ],
-           
+            [
+                'usertype' => 'admin',
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'mobile' => '01873593399',
+                'address' => 'Rangpur',
+                'gender' => 'male',
+                'fname' => 'Abdur Razzak',
+                'mname' => 'Masuda Begum',
+                'religion' => 'Islam',
+                'id_no' => '1996589632',
+                'dob' => '2002-05-23', // Completed missing date
+                'code' => '9578', // Added a new unique code
+                'password' => Hash::make('9578'), // Hashed password for the new code
+                'status' => 1,
+                'created_at' => '2025-01-10 10:46:00', // Added a new created_at timestamp
+            ],
+
         ];
 
         DB::table('users')->insert($users);

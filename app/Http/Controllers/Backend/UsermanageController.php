@@ -14,7 +14,7 @@ class UsermanageController extends Controller
      */
     public function manageuser()
     {
-        $data = User::orderBy('name', 'asc')->get();
+        $data = User::orderBy('name', 'asc')->where('usertype', 'employee')->orWhere('usertype', 'admin')->get();
         return view('backend.pages.manage-user.all-user', compact('data'));
     }
     /**

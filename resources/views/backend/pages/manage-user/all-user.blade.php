@@ -50,12 +50,12 @@
                                             <td>{{ $value->code }}</td>
                                             <td>{{ $value->address }}</td>
                                             <td>
-                                                @if ($value->role == 'admin')
+                                                @if ($value->usertype == 'admin'||$value->usertype == 'employee')
                                                     <span
-                                                        class="badge rounded-pill bg-success text-capitalize">{{ $value->role }}</span>
+                                                        class="badge rounded-pill bg-success text-capitalize">{{ $value->usertype }}</span>
                                                 @else
                                                     <span
-                                                        class="badge rounded-pill bg-info text-capitalize">{{ $value->role }}</span>
+                                                        class="badge rounded-pill bg-info text-capitalize">{{ $value->usertype }}</span>
                                                 @endif
                                             </td>
                                             <td>{{$value->created_at? $value->created_at->format('d M Y'):'' }}</td>
