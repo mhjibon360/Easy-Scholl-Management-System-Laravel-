@@ -31,6 +31,7 @@ class StudentMarkController extends Controller
     public function markfind(Request $request)
     {
         $data = AssignStudent::with(['class', 'year', 'group', 'shift', 'student', 'discount', 'studentmark'])->where('year_id', $request->year_id)->where('class_id', $request->class_id)->get();
+        // return($data);
         return view('backend.pages.pdf.marrk-entry', compact('data'));
     }
 
@@ -40,11 +41,8 @@ class StudentMarkController extends Controller
     public function markstore(Request $request)
     {
 
-        // return ($request->all());
-
         $marks = $request->mark;
         foreach ($marks as $key => $value) {
-            // student_id	id_no	year_id	class_id	assign_subject_id	exam_type_id	mark	created_at	updated_a
             StudentMark::create([
                 'student_id' => $request->student_id[$key],
                 'id_no' => $request->id_no[$key],
@@ -79,8 +77,7 @@ class StudentMarkController extends Controller
     public function markeditfind(Request $request)
     {
 
-
-        $data = StudentMark::with(['student'])->where('year_id', $request->year_id)->where('class_id', $request->class_id)
+        $data = StudentMark::with(['assignsubject', 'examtype', 'year',  'class', 'student'])->where('year_id', $request->year_id)->where('class_id', $request->class_id)
             ->where('assign_subject_id', $request->assign_subject_id)->where('exam_type_id', $request->exam_type_id)->get();
         // return ($data);
         return view('backend.pages.pdf.marrk-entry', compact('data'));

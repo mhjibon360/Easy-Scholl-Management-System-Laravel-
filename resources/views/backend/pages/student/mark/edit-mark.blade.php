@@ -114,7 +114,7 @@
 
                         $.each(response, function(key, value) {
                             html +=
-                                `<option value="${value.studentsubject.id}" >${value.studentsubject.name}</option>`;
+                                `<option value="${value.id}" >${value.studentsubject.name}</option>`;
                         });
                         $('#assign_subject_id').html(html);
                     }

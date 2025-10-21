@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // UserSeeder::class,
             // Assignsubjectseeder::class,
-            AssignStudentseeder::class,
+            // AssignStudentseeder::class,
+            GradeSeeder::class,
         ]);
     }
 }

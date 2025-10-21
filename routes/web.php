@@ -18,6 +18,9 @@ use App\Http\Controllers\Setup\AssignSubjectController;
 use App\Http\Controllers\Setup\StudentSubjectController;
 use App\Http\Controllers\Student\RollGenerateController;
 use App\Http\Controllers\Setup\StudentExamtypeController;
+use App\Http\Controllers\Student\GradeController;
+use App\Http\Controllers\Student\IdCardController;
+use App\Http\Controllers\Student\MarkSheetController;
 use App\Http\Controllers\Student\RegistrationfeeController;
 
 Route::get('/', function () {
@@ -191,8 +194,32 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/store/mark', 'markstore')->name('store.mark');
         });
 
-        Route::controller(DefaultController::class)->group(function(){
-            Route::get('/get-subject','getSubject')->name('get.subject');
+
+
+        // studnet  year all routes
+        Route::controller(GradeController::class)->group(function () {
+            Route::get('/all/student/grade/view', 'studentgradeview')->name('student.grade.view');
+            Route::get('/student/grade/add', 'studentgradeadd')->name('student.grade.add');
+            Route::post('/student/grade/store', 'studentgradestore')->name('student.grade.store');
+            Route::get('/student/grade/edit/{id}', 'studentgradeedit')->name('student.grade.edit');
+            Route::put('/student/grade/update/{id}', 'studentgradeupdate')->name('student.grade.update');
+            Route::delete('/student/grade/delete/{id}', 'studentgradedelete')->name('student.grade.delete');
+        });
+
+        // studnet  year all routes
+        Route::controller(MarkSheetController::class)->group(function () {
+            Route::get('/student/marksheet/create', 'studentmarksheetcreate')->name('student.marksheet.create');
+            Route::post('/student/marksheet/find', 'studentmarksheetfind')->name('student.marksheet.find');
+        });
+
+        // studnet  year all routes
+        Route::controller(IdCardController::class)->group(function () {
+            Route::get('/student/idcard/create', 'studentidcardcreate')->name('student.idcard.create');
+            Route::post('/student/idcard/find', 'studentidcardfind')->name('student.idcard.find');
+        });
+
+        Route::controller(DefaultController::class)->group(function () {
+            Route::get('/get-subject', 'getSubject')->name('get.subject');
         });
     });
 });

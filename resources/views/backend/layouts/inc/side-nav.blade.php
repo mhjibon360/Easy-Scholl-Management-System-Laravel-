@@ -105,6 +105,23 @@
                          <li>
                              <a href="{{ route('student.edit.mark') }}" data-key="t-login">Edit Mark</a>
                          </li>
+                         <li>
+                             <a href="{{ route('student.student.grade.view') }}" data-key="t-login">Manage Grade</a>
+                         </li>
+                     </ul>
+                 </li>
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow">
+                         <i data-feather="users"></i>
+                         <span data-key="t-authentication"> Manage Report</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li>
+                             <a href="{{ route('student.student.marksheet.create') }}" data-key="t-login">Generate Marksheet</a>
+                         </li>
+                         <li>
+                             <a href="{{ route('student.student.idcard.create') }}" data-key="t-login">Generate Id-Card</a>
+                         </li>
                      </ul>
                  </li>
              </ul>

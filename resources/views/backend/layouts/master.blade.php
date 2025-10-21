@@ -59,8 +59,8 @@
             @yield('content')
             <!-- End Page-content -->
 
-            @include('backend.layouts.inc.footer')
         </div>
+        @include('backend.layouts.inc.footer')
         <!-- end main content-->
 
     </div>

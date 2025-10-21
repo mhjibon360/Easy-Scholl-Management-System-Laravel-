@@ -190,6 +190,35 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $grade_name
+ * @property string $grade_point
+ * @property string $start_marks
+ * @property string $end_marks
+ * @property string $start_point
+ * @property string $end_point
+ * @property string $remarks
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereEndMarks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereEndPoint($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereGradeName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereGradePoint($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereRemarks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereStartMarks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereStartPoint($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentGrade whereUpdatedAt($value)
+ */
+	class StudentGrade extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -216,7 +245,11 @@ namespace App\Models{
  * @property string $mark
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\AssignSubject|null $assignsubject
+ * @property-read \App\Models\StudentClass|null $class
+ * @property-read \App\Models\ExamType|null $examtype
  * @property-read \App\Models\User|null $student
+ * @property-read \App\Models\StudentYear|null $year
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudentMark query()
