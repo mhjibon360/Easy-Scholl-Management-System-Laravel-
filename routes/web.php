@@ -1,26 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Setup\StudentController;
+use App\Http\Controllers\Student\GradeController;
+use App\Http\Controllers\Student\IdCardController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Setup\FeeAmountController;
+use App\Http\Controllers\Mark\StudentMarkController;
 use App\Http\Controllers\Student\RegisterController;
 use App\Http\Controllers\Setup\DesignationController;
 use App\Http\Controllers\Setup\FeeCategoryController;
 use App\Http\Controllers\Setup\StudentYearController;
+use App\Http\Controllers\Student\MarkSheetController;
 use App\Http\Controllers\Backend\UsermanageController;
-use App\Http\Controllers\DefaultController;
-use App\Http\Controllers\Mark\StudentMarkController;
 use App\Http\Controllers\Setup\StudentGroupController;
 use App\Http\Controllers\Setup\StudentShiftController;
 use App\Http\Controllers\Setup\AssignSubjectController;
 use App\Http\Controllers\Setup\StudentSubjectController;
 use App\Http\Controllers\Student\RollGenerateController;
 use App\Http\Controllers\Setup\StudentExamtypeController;
-use App\Http\Controllers\Student\GradeController;
-use App\Http\Controllers\Student\IdCardController;
-use App\Http\Controllers\Student\MarkSheetController;
 use App\Http\Controllers\Student\RegistrationfeeController;
 
 Route::get('/', function () {
@@ -79,10 +80,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/student/year/edit/{id}', 'studentyearedit')->name('student.year.edit');
             Route::put('/student/year/update/{id}', 'studentyearupdate')->name('student.year.update');
             Route::delete('/student/year/delete/{id}', 'studentyeardelete')->name('student.year.delete');
-            Route::get('/student/year/export','yearexport')->name('student.year.export');
-            Route::get('/student/year/import','yearimport')->name('student.year.import');
-            Route::post('/student/year/import/store','yearimportstore')->name('student.year.import.store');
-
+            Route::get('/student/year/export', 'yearexport')->name('student.year.export');
+            Route::get('/student/year/import', 'yearimport')->name('student.year.import');
+            Route::post('/student/year/import/store', 'yearimportstore')->name('student.year.import.store');
         });
 
         // studnet  group all routes
@@ -225,9 +225,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/student/idcard/find', 'studentidcardfind')->name('student.idcard.find');
         });
 
+
+
+
+
         Route::controller(DefaultController::class)->group(function () {
             Route::get('/get-subject', 'getSubject')->name('get.subject');
         });
+    });
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('/settings', 'setting')->name('settings');
+        Route::put('/general/setting/update', 'generalsettingupdate')->name('general.setting.update');
+        Route::put('/smtp/setting/update', 'smtpsettingupdate')->name('smtp.setting.update');
+
+        Route::get('/maintenance/mode/up', 'maintenancemodeup')->name('maintenance.mode.up');
+        Route::get('/maintenance/mode/down', 'maintenancemodedown')->name('maintenance.mode.down');
     });
 });
 
