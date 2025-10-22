@@ -11,6 +11,9 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
+    <!-- choices css -->
+    <link href="{{ asset('backend/assets/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet"
+        type="text/css" />
     <!-- DataTables -->
     <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}"
         rel="stylesheet" type="text/css" />
@@ -230,6 +233,8 @@
     <script src="{{ asset('backend/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}">
     </script>
 
+    <!-- choices js -->
+    <script src="{{ asset('backend/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
     <!-- Sweet Alerts js -->
     <script src="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
@@ -241,6 +246,9 @@
 
     <!-- dashboard init -->
     <script src="{{ asset('backend/assets/js/pages/dashboard.init.js') }}"></script>
+
+    <!-- init js -->
+    <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
 
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
     <script>

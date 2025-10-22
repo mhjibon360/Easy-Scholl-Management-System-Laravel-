@@ -40,7 +40,8 @@
 
                                 <div class="mb-3 form-group">
                                     <label for="class_id" class="form-label text-capitalize">Select Class</label>
-                                    <select name="class_id" id="class_id" class="form-control" required>
+                                    <select name="class_id" id="class_id" class="form-control" required data-trigger
+                                        id="choices-single-no-search">
                                         <option value="" disabled selected>Choose Class</option>
                                         @foreach ($allclasses as $class)
                                             <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -56,7 +57,8 @@
                                         <div class="col-md-4">
                                             <div class="mb-3 form-group">
                                                 <label class="form-label text-capitalize">Subject</label>
-                                                <select name="subject_id[]" class="form-control" required>
+                                                <select name="subject_id[]" class="form-control" required data-trigger
+                                        id="choices-single-no-search">
                                                     <option value="" disabled selected>choose subject</option>
                                                     @foreach ($allsubjects as $subject)
                                                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>

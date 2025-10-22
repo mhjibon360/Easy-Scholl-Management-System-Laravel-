@@ -26,7 +26,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="my-3 from-group">
-                                    <select name="year_id" id="year_id" class=" form-control" required>
+                                    <select name="year_id" id="year_id" class=" form-control" required data-trigger
+                                        id="choices-single-no-search">
                                         <option value="" selected disabled>--choose year--</option>
                                         @foreach ($allyears as $year)
                                             <option value="{{ $year->id }}"
@@ -38,7 +39,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="my-3 from-group">
-                                    <select name="class_id" id="class_id" class=" form-control" required>
+                                    <select name="class_id" id="class_id" class=" form-control" required data-trigger
+                                        id="choices-single-no-search">
                                         <option value="" selected disabled>--choose class--</option>
                                         @foreach ($allclassess as $class)
                                             <option value="{{ $class->id }}"
@@ -61,7 +63,6 @@
 
                 <div class="row">
                     <div class="col-12" id="result_holder">
-
                     </div>
                 </div>
                 <button class=" btn btn-success">Generate</button>
