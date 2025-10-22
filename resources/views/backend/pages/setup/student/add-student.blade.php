@@ -28,16 +28,16 @@
                             <div>
                                 <div>
                                     &nbsp;&nbsp;<a href="{{ route('setup.student.class.export') }}"
-                                        class=" btn btn-warning waves-effect waves-light">Export Student Class &nbsp;<i
+                                        class=" btn btn-warning waves-effect waves-light">Export Class &nbsp;<i
                                             class=" fas fa-download"></i></a>
 
 
                                     &nbsp;&nbsp;<a href="{{ route('setup.student.class.import') }}"
-                                        class=" btn btn-primary waves-effect waves-light">Import Student Class &nbsp;<i
+                                        class=" btn btn-primary waves-effect waves-light">Import Class &nbsp;<i
                                             class=" fas fa-upload"></i></a>
 
                                     <a href="{{ route('setup.student.class.view') }}"
-                                        class=" btn btn-primary waves-effect waves-light">All Studnet-Class &nbsp;<i
+                                        class=" btn btn-dark waves-effect waves-light">All Studnet-Class &nbsp;<i
                                             class=" fas fa-list"></i></a>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="mt-2">
                                     <button type="submit"
                                         class=" w-md btn btn-primary waves-effect waves-light">Submit</button>
-                                    <a type="reset" class="btn btn-danger w-md">Cancel</a>
+                                    <a href="{{ route('setup.student.class.view') }}" class="btn btn-danger w-md">Cancel</a>
                                 </div>
                             </form>
                         </div>
@@ -76,7 +76,7 @@
 @push('script')
     <script type="text/javascript">
         $(document).ready(function() {
-            // change password validation
+            // validation
             $('#myForm').validate({
                 rules: {
                     name: {

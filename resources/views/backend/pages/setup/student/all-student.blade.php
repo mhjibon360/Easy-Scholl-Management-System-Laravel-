@@ -24,9 +24,19 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h4 class="card-title">Show All Student Class</h4>
-                            <a href="{{ route('setup.student.class.add') }}"
-                                class=" btn btn-primary waves-effect waves-light">Add Studnet-Class &nbsp;<i
-                                    class=" fas fa-plus-circle"></i></a>
+                            <div>
+                                &nbsp;&nbsp;<a href="{{ route('setup.student.class.export') }}"
+                                        class=" btn btn-warning waves-effect waves-light">Export  Class &nbsp;<i
+                                            class=" fas fa-download"></i></a>
+
+
+                                    &nbsp;&nbsp;<a href="{{ route('setup.student.class.import') }}"
+                                        class=" btn btn-primary waves-effect waves-light">Import  Class &nbsp;<i
+                                            class=" fas fa-upload"></i></a>
+                                            <a href="{{ route('setup.student.class.add') }}"
+                                                class=" btn btn-primary waves-effect waves-light">Add Studnet-Class &nbsp;<i
+                                                    class=" fas fa-plus-circle"></i></a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">

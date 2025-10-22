@@ -2,10 +2,10 @@
 
 namespace App\Imports;
 
-use App\Models\StudentClass;
+use App\Models\StudentYear;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class ClassImport implements ToModel
+class YearImport implements ToModel
 {
     /**
      * @param array $row
@@ -14,13 +14,12 @@ class ClassImport implements ToModel
      */
     public function model(array $row)
     {
-
         if (!isset($row[0]) || trim($row[0]) === '') {
             return null;
         }
 
-        return new StudentClass([
-            'name' => $row[0],
+        return new StudentYear([
+            'name'     => $row[0],
         ]);
     }
 }

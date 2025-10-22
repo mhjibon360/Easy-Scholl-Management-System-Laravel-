@@ -104,19 +104,27 @@ class StudentController extends Controller
      */
     public function studentclassimportstore(Request $request)
     {
-        return($request->all());
-        
-        Excel::import(new ClassImport, $request->file('import_file'));
+
+        if ($request->hasFile('import_file')) {
+            $import_file = $request->file('import_file');
+            $name = hexdec(uniqid()) . '.' . $import_file->getClientOriginalExtension();
+            $url = "upload/excel/class/" . $name;
+            $import_file->move(public_path("upload/excel/class/"), $name);
+        }
+        Excel::import(new ClassImport, $url);
+
         // action with notification
         notyf()->info('Class Imported Success');
         return redirect()->route('setup.student.class.view');
     }
 
     /**
-     * student class export
+     * student  export
      */
     public function studentclassexport()
     {
         return Excel::download(new ClassExport, 'studentclass.xlsx');
     }
+
+
 }

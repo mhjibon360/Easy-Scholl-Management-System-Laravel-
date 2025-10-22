@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Setup;
 
-use App\Http\Controllers\Controller;
+use App\Exports\YearExport;
 use App\Models\StudentYear;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Imports\YearImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentYearController extends Controller
 {
@@ -86,5 +89,42 @@ class StudentYearController extends Controller
         // action with notification
         notyf()->warning('Student-Class delete success');
         return redirect()->route('setup.student.year.view');
+    }
+
+
+    /**
+     * year import
+     */
+    public function yearimport()
+    {
+        return view('backend.pages.setup.year.import-year');
+    }
+
+    /**
+     * year import store
+     */
+    public function yearimportstore(Request $request)
+    {
+
+        if ($request->hasFile('import_file')) {
+            $import_file = $request->file('import_file');
+            $name = hexdec(uniqid()) . '.' . $import_file->getClientOriginalExtension();
+            $url = "upload/excel/year/" . $name;
+            $import_file->move(public_path("upload/excel/year/"), $name);
+
+            Excel::import(new YearImport, $url);
+            // action with notification
+            notyf()->info('Year list imported success');
+            return redirect()->route('setup.student.year.view');
+        }
+    }
+
+
+    /**
+     * year export
+     */
+    public function yearexport()
+    {
+        return Excel::download(new YearExport, 'year.xlsx');
     }
 }
