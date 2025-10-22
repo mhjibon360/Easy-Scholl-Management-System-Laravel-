@@ -19,30 +19,7 @@
             </div>
             <!-- end page title -->
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4 class="card-title text-capitalize">Software Maintenance</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="alert alert-warning alert-dismissible alert-label-icon label-arrow fade show"
-                                role="alert">
-                                <i class="mdi mdi-alert-outline label-icon"></i><strong>Warning</strong> The technical
-                                meaning of maintenance involves functional checks, servicing, repairing or replacing of
-                                necessary devices, equipment, machinery, building infrastructure and supporting utilities in
-                                industrial, business, and residential installations.[1][2] Terms such as "predictive" or
-                                "planned" maintenance describe various cost-effective practices aimed at keeping equipment
-                                operational; these activities occur either before[3] or after a potential failure
-                            </div>
-                            <div class="mt-2">
-                                <a href="{{ route('maintenance.mode.down') }}" class=" w-md btn btn-danger waves-effect waves-light">Start Maintenance</a>
-                                <a href="{{ route('maintenance.mode.up') }}" class="btn btn-success w-md">End Maintenance</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- end col -->
-            </div> <!-- end row -->
+
 
             <div class="row">
                 <div class="col-12">
@@ -72,6 +49,58 @@
                                     <a href="{{ route('settings') }}" class="btn btn-danger w-md">Cancel</a>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h4 class="card-title text-capitalize">Software Maintenance</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning alert-dismissible alert-label-icon label-arrow fade show"
+                                role="alert">
+                                <i class="mdi mdi-alert-outline label-icon"></i><strong>Warning 🛠 Maintenance Mode</strong>
+                                <span>
+                                    When the system enters Maintenance Mode, all users except administrators with the secret
+                                    access code will be temporarily locked out.
+                                    This feature allows you to safely perform updates, fix bugs, or make changes without
+                                    disrupting student, teacher, or parent access.
+
+                                    While in maintenance mode:
+
+                                    The public site and user dashboards will show a “We’re Under Maintenance” message.
+
+                                    Only admins with the secret code can access the site for testing.
+
+                                    Once your updates are complete, you can bring the system back online with one click.
+
+                                    Use this feature responsibly to ensure system stability and a smooth experience for all
+                                    users.
+                                </span>
+                            </div>
+                            @if (!app()->isDownForMaintenance())
+                                <form id="myForm" action="{{ route('maintenance.mode.down') }}" method="post">
+                                    @csrf
+                                    <div class="form-group my-3">
+                                        <label for="maintenance_code">Maintenanc Secret Code</label>
+                                        <input type="text" class=" form-control" id="maintenance_code"
+                                            name="maintenance_code">
+                                    </div>
+                                    <div class="mt-2">
+                                        <button class=" w-md btn btn-danger waves-effect waves-light">Start
+                                            Maintenance</button>
+
+                                    </div>
+                                </form>
+                            @else
+                                <a href="{{ route('maintenance.mode.up') }}" class="btn btn-success w-md">End
+                                    Maintenance</a>
+                            @endif
+
                         </div>
                     </div>
                 </div> <!-- end col -->
@@ -197,19 +226,19 @@
 
 @endsection
 @push('script')
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function() {
 
             // change password validation
             $('#myForm').validate({
                 rules: {
-                    name: {
+                    maintenance_code: {
                         required: true,
                     },
                 },
                 messages: {
-                    name: {
-                        required: 'please place year',
+                    maintenance_code: {
+                        required: 'please enter maintenance code',
                     },
                 },
                 errorElement: 'strong',
@@ -225,5 +254,5 @@
                 },
             });
         });
-    </script> --}}
+    </script>
 @endpush

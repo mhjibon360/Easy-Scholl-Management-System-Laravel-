@@ -86,7 +86,7 @@ class SettingController extends Controller
         Artisan::call('up');
 
         // action with notification
-        notyf()->info('Application is now live.');
+        notyf()->info('Maintenance mode ended successfully!');
         return redirect()->back();
     }
     /**
@@ -94,11 +94,13 @@ class SettingController extends Controller
      */
     public function maintenancemodedown(Request $request)
     {
-        Artisan::call('down');
+
+        Artisan::call('down', [
+            '--secret' => $request->maintenance_code,
+        ]);
 
         // action with notification
-        // notyf()->info('Application is now live.');
-        notyf()->info('Application maintenance start.');
+        notyf()->warning('Maintenance mode started successfully!');
         return redirect()->back();
     }
 }

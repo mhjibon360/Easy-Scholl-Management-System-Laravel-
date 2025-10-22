@@ -238,8 +238,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/general/setting/update', 'generalsettingupdate')->name('general.setting.update');
         Route::put('/smtp/setting/update', 'smtpsettingupdate')->name('smtp.setting.update');
 
+        Route::post('/maintenance/mode', 'maintenancemodedown')->name('maintenance.mode.down');
         Route::get('/maintenance/mode/up', 'maintenancemodeup')->name('maintenance.mode.up');
-        Route::get('/maintenance/mode/down', 'maintenancemodedown')->name('maintenance.mode.down');
     });
 });
 
