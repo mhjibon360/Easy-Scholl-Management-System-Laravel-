@@ -64,4 +64,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(StudentMark::class, 'student_id', 'id');
     }
+
+    /**
+     * Get the student that owns the AssignStudent
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function designation(): BelongsTo
+    {
+        return $this->belongsTo(Designation::class, 'designation_id', 'id');
+    }
 }

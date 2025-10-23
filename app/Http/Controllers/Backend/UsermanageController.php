@@ -14,8 +14,17 @@ class UsermanageController extends Controller
      */
     public function manageuser()
     {
-        $data = User::orderBy('name', 'asc')->where('usertype', 'employee')->orWhere('usertype', 'admin')->get();
+        $data = User::orderBy('name', 'asc')->where('role', 'admin')->get();
         return view('backend.pages.manage-user.all-user', compact('data'));
+    }
+
+    /**
+     * manage teacher view
+     */
+    public function manageteacher()
+    {
+        $data = User::orderBy('name', 'asc')->where('role', 'teacher')->get();
+        return view('backend.pages.teacher.all-teacher', compact('data'));
     }
     /**
      * create user view

@@ -172,15 +172,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting query()
- */
-	class Setting extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * @property int $id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -330,7 +321,7 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
- * @property string|null $usertype Student,Employee,Admin
+ * @property string|null $usertype 1=admin,2=teacher,3=student
  * @property string $name
  * @property string $email
  * @property string|null $photo
@@ -348,12 +339,13 @@ namespace App\Models{
  * @property string|null $join_date
  * @property int|null $designation_id
  * @property float|null $salary
- * @property string|null $role admin=head of sotware,operator=computer operator,user=employee
+ * @property string $role
  * @property int $status 0=inactive,1=active
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\AssignStudent|null $assignstudent
+ * @property-read \App\Models\Designation|null $designation
  * @property-read \App\Models\StudentMark|null $marks
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count

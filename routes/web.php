@@ -15,6 +15,7 @@ use App\Http\Controllers\Setup\DesignationController;
 use App\Http\Controllers\Setup\FeeCategoryController;
 use App\Http\Controllers\Setup\StudentYearController;
 use App\Http\Controllers\Student\MarkSheetController;
+use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Backend\UsermanageController;
 use App\Http\Controllers\Setup\StudentGroupController;
 use App\Http\Controllers\Setup\StudentShiftController;
@@ -22,6 +23,8 @@ use App\Http\Controllers\Setup\AssignSubjectController;
 use App\Http\Controllers\Setup\StudentSubjectController;
 use App\Http\Controllers\Student\RollGenerateController;
 use App\Http\Controllers\Setup\StudentExamtypeController;
+use App\Http\Controllers\Student\StudentAccountController;
+use App\Http\Controllers\Teacher\TeacherAccountController;
 use App\Http\Controllers\Student\RegistrationfeeController;
 
 Route::get('/', function () {
@@ -29,15 +32,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(BackendController::class)->group(function () {
@@ -49,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(UsermanageController::class)->group(function () {
         Route::get('/manage/user', 'manageuser')->name('manage.user');
+        Route::get('/manage/teacher', 'manageteacher')->name('manage.teacher');
         Route::get('/add/user', 'adduser')->name('add.user');
         Route::post('/store/user', 'storeuser')->name('store.user');
         Route::get('/edit/user/{id}', 'edituser')->name('edit.user');

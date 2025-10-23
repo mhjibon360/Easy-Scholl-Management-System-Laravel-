@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\AssignStudent;
 use App\Models\StudentSubject;
 use App\Http\Controllers\Controller;
+use App\Models\Designation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,7 +37,8 @@ class BackendController extends Controller
      */
     public function edit()
     {
-        return view('backend.pages.profile.index');
+        $data['alldesignations'] = Designation::all();
+        return view('backend.pages.profile.index', $data);
     }
 
     /**
@@ -72,6 +74,13 @@ class BackendController extends Controller
             'address' => $request->address,
             'photo' => isset($url) ? $url : $data->photo,
             'updated_at' => now(),
+            'mobile' => $request->mobile,
+            'gender' => $request->gender,
+            'fname' => $request->fname,
+            'designation_id' => $request->designation_id,
+            'mname' => $request->mname,
+            'religion' => $request->religion,
+            'dob' => $request->dob,
         ]);
 
         // action with notification

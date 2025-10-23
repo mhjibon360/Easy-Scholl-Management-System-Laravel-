@@ -39,7 +39,7 @@
                                             <label for="role" class="form-label text-capitalize">Select Role</label>
                                             <select class="form-control" name="role" id="role">
                                                 <option value="admin">Admin</option>
-                                                <option value="operator">Operator</option>
+                                                <option value="teacher">Teacher</option>
                                             </select>
                                             @error('role')
                                                 <span class=" text-danger">{{ $message }}</span>

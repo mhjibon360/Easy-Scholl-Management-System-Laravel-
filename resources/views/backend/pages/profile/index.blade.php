@@ -42,10 +42,26 @@
 
                                                 <div
                                                     class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
-                                                    @if (Auth::user()->address)
-                                                        <div><i
-                                                                class="mdi mdi-circle-medium me-1 text-success align-middle"></i>{{ Auth::user()->address }}
+                                                    @if (Auth::user()->role)
+                                                        <div class=" text-capitalize"><i
+                                                                class="mdi mdi-circle-medium me-1 text-success align-middle"></i>{{ Auth::user()->role }}
                                                         </div>
+                                                        <div>Login-code: <span
+                                                                class=" text-danger">{{ Auth::user()->code }}</span></div>
+                                                        <div>Id-Number: <span
+                                                                class=" text-primary">{{ Auth::user()->id_no }}</span></div>
+
+                                                        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+                                                            <div>Joining Date: <span
+                                                                    class=" text-dark">{{ Auth::user()->join_date }}</span>
+                                                            </div>
+                                                            <div>Designation: <span
+                                                                    class=" text-dark">{{ Auth::user()->designation->name }}</span>
+                                                            </div>
+                                                            <div>Salary: <span
+                                                                    class=" text-dark">{{ Auth::user()->salary }}</span>
+                                                            </div>
+                                                        @endif
                                                     @endif
                                                 </div>
                                             </div>
@@ -98,14 +114,85 @@
                                                         value="{{ Auth::user()->email }}" id="email" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="mb-3 form-group">
                                                     <label for="address" class="form-label text-capitalize">Address</label>
                                                     <input class="form-control" type="text" name="address"
                                                         value="{{ Auth::user()->address }}" id="address">
                                                 </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
+                                                <div class="mb-3 form-group">
+                                                    <label for="mobile" class="form-label text-capitalize">mobile/phonee
+                                                        number</label>
+                                                    <input class="form-control" type="text" name="mobile"
+                                                        value="{{ Auth::user()->mobile }}" id="mobile">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3 form-group">
+                                                    <label for="fname" class="form-label text-capitalize">Father's
+                                                        Name</label>
+                                                    <input class="form-control" type="text" name="fname"
+                                                        value="{{ Auth::user()->fname }}" id="fname">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3 form-group">
+                                                    <label for="mname" class="form-label text-capitalize">Mother's
+                                                        Name</label>
+                                                    <input class="form-control" type="text" name="mname"
+                                                        value="{{ Auth::user()->mname }}" id="mname">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3 form-group">
+                                                    <label for="religion" class="form-label text-capitalize">religion
+                                                    </label>
+                                                    <select class="form-control" name="religion" id="religion">
+                                                        <option value="islam" @selected(Auth::user()->religion == 'islam')>Islam</option>
+                                                        <option value="hindu" @selected(Auth::user()->religion == 'hindu')>Hindu</option>
+                                                        <option value="kristan" @selected(Auth::user()->religion == 'kristan')>Kristan
+                                                        </option>
+                                                    </select>
+                                                    @error('religion')
+                                                        <span class=" text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <div class="mb-3 form-group">
+                                                    <label for="dob" class="form-label text-capitalize">Date of
+                                                        Birth</label>
+                                                    <input class="form-control" type="date" name="dob"
+                                                        value="{{ Auth::user()->dob }}" id="dob">
+                                                </div>
+                                            </div>
+                                            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+                                                <div class="col-md-6">
+                                                    <div class="mb-3 form-group">
+                                                        <label for="designation_id"
+                                                            class="form-label text-capitalize">Designation
+                                                        </label>
+                                                        <select class="form-control" name="designation_id"
+                                                            id="designation_id">
+                                                            <option value="" selected disabled>choose designation
+                                                            </option>
+                                                            @foreach ($alldesignations as $desig)
+                                                                <option value="{{ $desig->id }}"
+                                                                    @selected(Auth::user()->designation_id == $desig->id)>{{ $desig->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('designation_id')
+                                                            <span class=" text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            <div class="col-md-4">
                                                 <div class="mb-3 form-group">
                                                     <label for="photo" class="form-label text-capitalize">Profile
                                                         Photo</label>
@@ -113,7 +200,7 @@
                                                         value="{{ Auth::user()->photo }}" id="photo">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="mb-3 form-group">
                                                     <img src="{{ isset(Auth::user()->photo) ? asset(Auth::user()->photo) : Avatar::create(Auth::user()->name)->toBase64() }}"
                                                         class=" img-fluid img-thumbnail p-1 photo_preview"
@@ -123,8 +210,10 @@
                                             </div>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class=" w-md btn btn-primary waves-effect waves-light">Update</button>
-                                            <a type="reset" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
+                                            <button type="submit"
+                                                class=" w-md btn btn-primary waves-effect waves-light">Update</button>
+                                            <a type="reset"
+                                                class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
                                         </div>
                                     </form>
                                 </div>
@@ -172,7 +261,9 @@
                                             </div>
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class=" w-md btn btn-dark waves-effect waves-light">Change Password</button>
+                                            <button type="submit"
+                                                class=" w-md btn btn-dark waves-effect waves-light">Change
+                                                Password</button>
                                             <a type="reset" class="btn btn-danger w-md">Cancel</a>
                                         </div>
                                     </form>

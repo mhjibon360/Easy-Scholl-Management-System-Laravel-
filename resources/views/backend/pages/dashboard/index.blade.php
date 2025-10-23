@@ -195,57 +195,63 @@
 
 
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4 class="card-title text-capitalize">Recent Register Students</h4>
-                                <a href="{{ route('student.account.list') }}" class="btn-sm btn btn-dark waves-effect btn-label waves-light"><i class="bx bx-loader label-icon"></i> Loading..</a>
-                        </div>
-                        <div class="card-body">
-                            <table  class="table table-bordered dt-responsive  nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>Si</th>
-                                        <th>Name</th>
-                                        <th>ID No</th>
-                                        <th>E-mail</th>
-                                        <th>Roll</th>
-                                        <th>Year</th>
-                                        <th>Class</th>
-                                        <th>Image</th>
-                                        <th>Code</th>
-                                        <th>Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($recentstudents as $key => $value)
+            @if (Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <h4 class="card-title text-capitalize">Recent Register Students</h4>
+                                @if (Auth::user()->role == 'admin')
+                                    <a href="{{ route('student.account.list') }}"
+                                        class="btn-sm btn btn-dark waves-effect btn-label waves-light"><i
+                                            class="bx bx-loader label-icon"></i> Loading..</a>
+                                @endif
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered dt-responsive  nowrap w-100">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->name }}</td>
-                                            <td>{{ $value->id_no }}</td>
-                                            <td>{{ $value->email }}</td>
-                                            <td>{{ $value->assignstudent->roll }}</td>
-                                            <td>{{ $value->assignstudent->year->name }}</td>
-                                            <td>{{ $value->assignstudent->class->name }}</td>
-                                            <td>
-                                                <img src="{{ isset($value->photo) ? asset($value->photo) : Avatar::create($value->name)->toBase64() }}"
-                                                    class=" img-fluid img-thumbnail" alt=""
-                                                    style="height: 50px;width:50px">
-                                            </td>
-                                            <td>
-                                                {{ $value->code }}
-                                            </td>
-                                            <td>{{ $value->created_at->format('d M Y') }}</td>
-
+                                            <th>Si</th>
+                                            <th>Name</th>
+                                            <th>ID No</th>
+                                            <th>E-mail</th>
+                                            <th>Roll</th>
+                                            <th>Year</th>
+                                            <th>Class</th>
+                                            <th>Image</th>
+                                            <th>Code</th>
+                                            <th>Time</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($recentstudents as $key => $value)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $value->name }}</td>
+                                                <td>{{ $value->id_no }}</td>
+                                                <td>{{ $value->email }}</td>
+                                                <td>{{ $value->assignstudent->roll }}</td>
+                                                <td>{{ $value->assignstudent->year->name }}</td>
+                                                <td>{{ $value->assignstudent->class->name }}</td>
+                                                <td>
+                                                    <img src="{{ isset($value->photo) ? asset($value->photo) : Avatar::create($value->name)->toBase64() }}"
+                                                        class=" img-fluid img-thumbnail" alt=""
+                                                        style="height: 50px;width:50px">
+                                                </td>
+                                                <td>
+                                                    {{ $value->code }}
+                                                </td>
+                                                <td>{{ $value->created_at->format('d M Y') }}</td>
+
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div> <!-- end col -->
-            </div> <!-- end row -->
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+            @endif
         </div> <!-- container-fluid -->
     </div>
 @endsection

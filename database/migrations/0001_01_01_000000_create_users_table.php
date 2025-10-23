@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('usertype')->nullable()->comment('Student,Employee,Admin');
+            $table->string('usertype')->nullable()->comment('1=admin,2=teacher,3=student');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('photo')->nullable();
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->date('join_date')->nullable();
             $table->integer('designation_id')->nullable();
             $table->double('salary')->nullable();
-            $table->string('role')->nullable()->comment('admin=head of sotware,operator=computer operator,user=employee');
+            $table->enum('role', ['admin', 'teacher', 'student'])->default('student');
             $table->tinyInteger('status')->default(1)->comment('0=inactive,1=active');
             $table->rememberToken();
             $table->timestamps();
