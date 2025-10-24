@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Setup;
 
-use App\Http\Controllers\Controller;
-use App\Models\StudentSubject;
 use Illuminate\Http\Request;
+use App\Models\AssignSubject;
+use App\Models\StudentSubject;
+use App\Http\Controllers\Controller;
+use App\Models\AssignStudent;
+use Illuminate\Support\Facades\Auth;
 
 class StudentSubjectController extends Controller
 {
@@ -86,5 +89,17 @@ class StudentSubjectController extends Controller
         // action with notification
         notyf()->warning('Student-Class delete success');
         return redirect()->route('setup.student.subject.view');
+    }
+
+    /**
+     * student my subject
+     */
+    public function studentmysubject()
+    {
+        $data['class'] = AssignStudent::with('class')->where('student_id', Auth::id())->first();
+        $data['subectlists'] = AssignSubject::with('studentsubject')->where('class_id', $data['class']->class->id)->get();
+
+        // return ($data['subectlists']);
+        return view('backend.pages.student.subject.my-subject', $data);
     }
 }

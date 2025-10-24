@@ -31,7 +31,8 @@
                         </div>
                         <div class="card-body">
 
-                            <form id="myForm" action="{{ route('student.account.promotion.store',$data->id) }}" method="post" enctype="multipart/form-data">
+                            <form id="myForm" action="{{ route('student.account.promotion.store', $data->id) }}"
+                                method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -154,7 +155,7 @@
                                                 <option value="" selected disabled>choose fees</option>
                                                 @foreach ($allfees as $fee)
                                                     <option value="{{ $fee->id }}"
-                                                        {{ $data->assignstudent->discount->feecategory->id == $fee->id ? 'selected' : '' }}>
+                                                        {{ @$data->assignstudent->discount->feecategory->id == $fee->id ? 'selected' : '' }}>
                                                         {{ $fee->name }}
                                                     </option>
                                                 @endforeach
@@ -170,7 +171,7 @@
                                             <label for="dob" class="form-label text-capitalize">date of birth <font
                                                     style="color: red;">*</font></label>
                                             <input class="form-control" type="date" name="dob"
-                                                value="{{ date('Y-m-d', strtotime($data->dob))  }}" id="dob">
+                                                value="{{ date('Y-m-d', strtotime($data->dob)) }}" id="dob">
                                             @error('dob')
                                                 <span class=" text-danger">{{ $message }}</span>
                                             @enderror
@@ -255,7 +256,7 @@
                                             <label for="discount" class="form-label text-capitalize">Discount Amount
                                             </label>
                                             <input class="form-control" type="text" name="discount"
-                                                value="{{ $data->assignstudent->discount->discount }}" id="discount">
+                                                value="{{ @$data->assignstudent->discount->discount }}" id="discount">
                                             @error('discount')
                                                 <span class=" text-danger">{{ $message }}</span>
                                             @enderror

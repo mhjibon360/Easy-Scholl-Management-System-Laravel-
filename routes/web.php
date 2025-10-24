@@ -139,6 +139,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/student/subject/edit/{id}', 'studentsubjectedit')->name('student.subject.edit');
             Route::put('/student/subject/update/{id}', 'studentsubjectupdate')->name('student.subject.update');
             Route::delete('/student/subject/delete/{id}', 'studentsubjectdelete')->name('student.subject.delete');
+
+            Route::get('/student/my/subject','studentmysubject')->name('student.my.subject');
         });
 
         // assign subjects all routes

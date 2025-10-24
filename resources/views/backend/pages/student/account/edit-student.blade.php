@@ -154,7 +154,7 @@
                                                 <option value="" selected disabled>choose fees</option>
                                                 @foreach ($allfees as $fee)
                                                     <option value="{{ $fee->id }}"
-                                                        {{ $data->assignstudent->discount->feecategory->id == $fee->id ? 'selected' : '' }}>
+                                                        {{ @$data->assignstudent->discount->feecategory->id == $fee->id ? 'selected' : '' }}>
                                                         {{ $fee->name }}
                                                     </option>
                                                 @endforeach
@@ -255,7 +255,7 @@
                                             <label for="discount" class="form-label text-capitalize">Discount Amount
                                             </label>
                                             <input class="form-control" type="text" name="discount"
-                                                value="{{ $data->assignstudent->discount->discount }}" id="discount">
+                                                value="{{ @$data->assignstudent->discount->discount }}" id="discount">
                                             @error('discount')
                                                 <span class=" text-danger">{{ $message }}</span>
                                             @enderror

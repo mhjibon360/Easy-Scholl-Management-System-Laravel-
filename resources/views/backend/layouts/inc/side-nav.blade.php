@@ -15,6 +15,15 @@
                      </a>
                  </li>
 
+                 @if (Auth::user()->role == 'student')
+                     <li>
+                         <a href="{{ route('setup.student.my.subject') }}">
+                             <i data-feather="book"></i>
+                             <span data-key="t-dashboard">My Subject</span>
+                         </a>
+                     </li>
+                 @endif
+
                  @if (Auth::user()->role == 'admin')
                      <li>
                          <a href="javascript: void(0);" class="has-arrow">
@@ -29,7 +38,8 @@
                                  <a href="{{ route('manage.teacher') }}" data-key="t-login">Teacher Account List</a>
                              </li>
                              <li>
-                                 <a href="{{ route('student.account.list') }}" data-key="t-login">Student Account List</a>
+                                 <a href="{{ route('student.account.list') }}" data-key="t-login">Student Account
+                                     List</a>
                              </li>
 
                          </ul>
